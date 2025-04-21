@@ -1,4 +1,5 @@
 import express from "express";
+import { authMiddleware } from "../middleware/auth.middleware.js";
 import { check, login, logout, register } from "../controllers/auth.controller.js";
 
 
@@ -9,9 +10,10 @@ authRoutes.post("/register" ,register)
 
 authRoutes.post("/login" ,login)
 
-authRoutes.post("/logout" ,logout)
+authRoutes.post("/logout" ,authMiddleware ,logout)
 
-authRoutes.post("/check" ,check)
+authRoutes.get("/check", authMiddleware, check)
+
 
 
 export default authRoutes;
